@@ -1,0 +1,100 @@
+-- I ran a silly survey with my family
+--Survey Results Here: https://docs.google.com/forms/d/1Sag-slVikbDlu92X-9ivAvRhYBeEz-7H4A9TO5_gnrQ/viewanalytics
+--With google forms I could export a CSV
+--My CSV had several respones of "I haven't seen it" so I imported as VARCHARs and converted later after setting them as null
+
+
+CREATE TABLE filmratings(
+datetime VARCHAR (55),
+	Jurassic VARCHAR (55),
+	MeanGirls VARCHAR (55),
+	Napolean VARCHAR (55),
+	GoodBurger VARCHAR (55),
+	Simpsons VARCHAR (55),
+	Music VARCHAR (55),
+	Lincoln VARCHAR (55),
+	Basterds VARCHAR (55)
+);
+
+
+SELECT *
+from filmratings;
+
+select napolean
+from filmratings
+where napolean like '%haven%';
+
+--this updates the columns that have the phrase "haven" as in haven't seen it, which was a choice in the form
+
+update filmratings
+set napolean = NULL 
+where napolean like '%haven%';
+
+
+--double check it worked
+SELECT *
+from filmratings;
+
+--repeat for each column that has a "haven't seen it" type response.
+
+update filmratings
+set simpsons = NULL 
+where simpsons like '%haven%';
+
+--double check it worked
+SELECT *
+from filmratings;
+
+
+update filmratings
+set music= NULL 
+where music like '%haven%';
+
+
+update filmratings
+set Lincoln = NULL 
+where Lincoln like '%haven%';
+
+update filmratings
+set Basterds = NULL 
+where Basterds like '%haven%';
+
+--double check it worked
+SELECT *
+from filmratings;
+
+
+--convert previous varchar columns to ints
+--after many trials and errors, I arrive at this:
+ALTER TABLE filmratings
+ALTER COLUMN jurassic TYPE int USING jurassic::integer;
+
+--double check it worked
+SELECT *
+from filmratings;
+
+ALTER TABLE filmratings
+ALTER COLUMN meangirls TYPE int USING meangirls::integer;
+
+ALTER TABLE napolean
+ALTER COLUMN meangirls TYPE int USING napolean::integer;
+
+ALTER TABLE filmratings
+ALTER COLUMN napolean TYPE int USING napolean::integer;
+
+ALTER TABLE filmratings
+ALTER COLUMN simpsons TYPE int USING simpsons::integer;
+
+
+ALTER TABLE filmratings
+ALTER COLUMN music TYPE int USING music::integer;
+
+ALTER TABLE filmratings
+ALTER COLUMN lincoln TYPE int USING lincoln::integer;
+
+ALTER TABLE filmratings
+ALTER COLUMN basterds TYPE int USING basterds::integer;
+
+--double check it worked
+SELECT *
+from filmratings;

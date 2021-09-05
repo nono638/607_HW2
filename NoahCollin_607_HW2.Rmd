@@ -1,0 +1,31 @@
+---
+title: "NoahCollin_607_HW2"
+output: pdf_document
+author: "Noah Collin"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(readr)
+```
+
+## Import CSV
+
+```{r Import CSV from SQL}
+library(readr)
+CleanedFilmSQLFile <- read_csv("CleanedFilmSQLFile")
+View(CleanedFilmSQLFile)
+```
+
+## Mean Girls Rating
+
+Histogram with Dotted Mean Line
+
+```{r pressure, echo=FALSE}
+ggplot(data = CleanedFilmSQLFile, aes(x = meangirls)) + 
+  geom_histogram(binwidth = .5, color = "blue", fill = "white")+
+  #geom_density()
+  geom_vline(aes(xintercept = mean(meangirls, na.rm=T)),
+             color = "red", linetype = "dashed", size=.8)
+```
